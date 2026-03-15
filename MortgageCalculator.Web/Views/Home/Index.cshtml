@@ -1,0 +1,131 @@
+﻿@model MortgageCalculator.Web.Models.MortgageDisplayModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Mortgage Calculator</h1>
+    <p class="lead">The Mortgage Calculator helps you:</p>
+    <ul>
+        <li>Choose the right loan for you</li>
+        <li>View the interest and repayment on your loan</li>
+    </ul>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <fieldset>
+                <legend>Calculator</legend>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LoanAmount, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.LoanAmount, new { @class = "form-control", placeholder = "0.00" })
+                        <span class="help-block">Enter the amount to borrow</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.InterestRate, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.InterestRate, new { @class = "form-control", placeholder = "0.00" })
+                        <span class="help-block">Enter the annual interest rate</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LoanDurationYears, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.LoanDurationYears, new { @class = "form-control", placeholder = "0" })
+                        <span class="help-block">Enter the loan duration in years</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SelectedMortgageType, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(
+                            m => m.SelectedMortgageType,
+                            Model.MortgageTypeOptions,
+                            "-- Select Mortgage Type --",
+                            new { @class = "form-control", id = "mortgageTypeDropdown" }
+                        )
+                        <span class="help-block">Choose a mortgage type</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-4">
+                        <input type="submit" value="Calculate" class="btn btn-primary" />
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+
+@if (Model.TotalRepayment.HasValue || Model.TotalInterest.HasValue)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Calculation Result</h2>
+            <p><strong>Monthly Repayment:</strong> @Model.MonthlyRepayment</p>
+            <p><strong>Total Repayment:</strong> @Model.TotalRepayment</p>
+            <p><strong>Total Interest:</strong> @Model.TotalInterest</p>
+        </div>
+    </div>
+}
+
+@if (Model.Mortgages != null && Model.Mortgages.Any())
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Active Mortgages</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Mortgage Type</th>
+                        <th>Interest Repayment</th>
+                        <th>Terms In Months</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Cancellation Fee</th>
+                        <th>Establishment Fee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Mortgages)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.MortgageType</td>
+                            <td>@item.InterestRepayment</td>
+                            <td>@item.TermsInMonths</td>
+                            <td>@item.EffectiveStartDate.ToShortDateString()</td>
+                            <td>@item.EffectiveEndDate.ToShortDateString()</td>
+                            <td>@item.CancellationFee</td>
+                            <td>@item.EstablishmentFee</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#mortgageTypeDropdown').select2({
+                placeholder: '-- Select Mortgage Type --',
+                allowClear: true,
+                width: 'resolve'
+            });
+
+        });</script>
+}
