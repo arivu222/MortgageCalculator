@@ -219,6 +219,5 @@ Possible enhancements:
 
 -   REST API for mortgage services
 -   ASP.NET Core migration
--   React / Angular frontend
 -   Docker containerization
 -   CI/CD pipeline
