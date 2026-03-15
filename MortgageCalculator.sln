@@ -15,6 +15,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MortgageCalculator.Data", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MortgageCalculator.WinFormsUI", "MortgageCalculator.WinForms\MortgageCalculator.WinFormsUI.csproj", "{9D9A8DDC-EF90-46E6-A5EE-EACF029E37B6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\web-ui-1.png = Docs\web-ui-1.png
+		Docs\web-ui-2.png = Docs\web-ui-2.png
+		Docs\winforms-ui.png = Docs\winforms-ui.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
