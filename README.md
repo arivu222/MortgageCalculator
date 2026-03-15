@@ -25,11 +25,13 @@ maintainability and scalability.
 
 ### Web Application
 
-Add screenshot later: `docs/web-ui.png`
+![MVC Mortgage Calculator](Docs/web-ui-1.png)
+
+![MVC Mortgage Calculator Calculation](Docs/web-ui-2.png)
 
 ### Windows Forms Application
 
-Add screenshot later: `docs/winforms-ui.png`
+![WinForms Mortgage Calculator](Docs/winforms-ui.png)
 
 ------------------------------------------------------------------------
 
