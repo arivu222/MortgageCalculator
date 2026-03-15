@@ -69,7 +69,50 @@ responsibilities across layers.
             NUnit test project
 
 ------------------------------------------------------------------------
+# Key Improvements and Fixes
 
+1. Updated the project to .NET Framework 4.8.
+
+2. Refactored the solution into proper N-Layer architecture by creating separate projects for:
+   - Repository layer
+   - Service layer
+
+3. Moved repository and service classes from the Web project into dedicated projects.
+
+4. Corrected compilation errors and dependency issues across the solution.
+      - Fixed incorrect fee mapping in the repository.  
+          `EstablishmentFee` was incorrectly assigned using `CancellationFee`.  
+          Corrected to map `EstablishmentFee` properly.
+    
+    - Fixed incorrect enum parsing logic.  
+          `InterestRepayment` was incorrectly parsed using `MortgageType`.  
+          Corrected to parse using the `InterestRepayment` field.
+    
+    - Enabled missing loan term mapping.  
+          `TermsInMonths` property was commented out in the repository mapping.  
+          Re-enabled to ensure the UI receives the mortgage duration.
+
+6. Implemented the missing `MortgageDataContext` class using Entity Framework 6.5.
+
+7. Created entity models for database interaction.
+8. Modified the **Index page** in the MVC application to load **active mortgage data** from the service layer.
+9. Implemented the **mortgage calculation functionality** in the MVC project to calculate:
+      - Total repayment over the lifetime of the loan
+      - Total interest paid over the lifetime of the loan
+10. Connected the UI inputs (**Loan Amount, Interest Rate, Loan Duration**) with the service layer to perform the calculation.
+    
+11. Created a **Windows Forms UI** implementing the same functionality as the MVC application, including:
+      - Displaying active mortgage data
+      - Mortgage type autocomplete dropdown
+      - Mortgage calculation inputs and results
+      - Clear functionality to reset the calculator fields
+12. Added a **Unit Test project (NUnit)** to validate key service layer functionality including:
+      - Mortgage calculation logic
+      - Active mortgage filtering
+      - Sorting by mortgage type and interest rate
+      - Validation scenarios for invalid inputs
+
+------------------------------------------------------------------------
 #  Features
 
 ## Mortgage Listing
